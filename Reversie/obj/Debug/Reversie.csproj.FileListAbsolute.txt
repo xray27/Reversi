@@ -1,0 +1,10 @@
+G:\code\c#\repos\Reversi\Reversie\bin\Debug\Reversie.exe.config
+G:\code\c#\repos\Reversi\Reversie\bin\Debug\Reversie.exe
+G:\code\c#\repos\Reversi\Reversie\bin\Debug\Reversie.pdb
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.csprojAssemblyReference.cache
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.Form1.resources
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.Properties.Resources.resources
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.csproj.GenerateResource.cache
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.csproj.CoreCompileInputs.cache
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.exe
+G:\code\c#\repos\Reversi\Reversie\obj\Debug\Reversie.pdb
