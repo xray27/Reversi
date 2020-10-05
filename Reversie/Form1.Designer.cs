@@ -36,12 +36,20 @@ namespace Reversie
             this.RedTurnLabel = new System.Windows.Forms.Label();
             this.BlueTurnLabel = new System.Windows.Forms.Label();
             this.NewGameButton = new System.Windows.Forms.Button();
-            this.StatusLabel = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
             this.HelpButton = new System.Windows.Forms.Button();
+            this.RedStone = new System.Windows.Forms.PictureBox();
+            this.BlueStone = new System.Windows.Forms.PictureBox();
+            this.RedStoneCount = new System.Windows.Forms.Label();
+            this.BlueStoneCount = new System.Windows.Forms.Label();
+            this.WinnerArea = new System.Windows.Forms.PictureBox();
+            this.WinnerLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GameArea)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedTurn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlueTurn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RedStone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BlueStone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WinnerArea)).BeginInit();
             this.SuspendLayout();
             // 
             // GameArea
@@ -109,15 +117,6 @@ namespace Reversie
             this.NewGameButton.UseVisualStyleBackColor = true;
             this.NewGameButton.Click += new System.EventHandler(this.NewGameButton_Click);
             // 
-            // StatusLabel
-            // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusLabel.Location = new System.Drawing.Point(112, 75);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(0, 25);
-            this.StatusLabel.TabIndex = 6;
-            // 
             // SettingsButton
             // 
             this.SettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,14 +137,76 @@ namespace Reversie
             this.HelpButton.Text = "Help";
             this.HelpButton.UseVisualStyleBackColor = true;
             // 
+            // RedStone
+            // 
+            this.RedStone.Location = new System.Drawing.Point(32, 105);
+            this.RedStone.Name = "RedStone";
+            this.RedStone.Size = new System.Drawing.Size(100, 100);
+            this.RedStone.TabIndex = 9;
+            this.RedStone.TabStop = false;
+            // 
+            // BlueStone
+            // 
+            this.BlueStone.Location = new System.Drawing.Point(202, 105);
+            this.BlueStone.Name = "BlueStone";
+            this.BlueStone.Size = new System.Drawing.Size(100, 100);
+            this.BlueStone.TabIndex = 10;
+            this.BlueStone.TabStop = false;
+            // 
+            // RedStoneCount
+            // 
+            this.RedStoneCount.AutoSize = true;
+            this.RedStoneCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RedStoneCount.ForeColor = System.Drawing.Color.Red;
+            this.RedStoneCount.Location = new System.Drawing.Point(42, 212);
+            this.RedStoneCount.Name = "RedStoneCount";
+            this.RedStoneCount.Size = new System.Drawing.Size(73, 20);
+            this.RedStoneCount.TabIndex = 11;
+            this.RedStoneCount.Text = "0 Stones";
+            // 
+            // BlueStoneCount
+            // 
+            this.BlueStoneCount.AutoSize = true;
+            this.BlueStoneCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlueStoneCount.ForeColor = System.Drawing.Color.Blue;
+            this.BlueStoneCount.Location = new System.Drawing.Point(209, 212);
+            this.BlueStoneCount.Name = "BlueStoneCount";
+            this.BlueStoneCount.Size = new System.Drawing.Size(73, 20);
+            this.BlueStoneCount.TabIndex = 12;
+            this.BlueStoneCount.Text = "0 Stones";
+            // 
+            // WinnerArea
+            // 
+            this.WinnerArea.Location = new System.Drawing.Point(13, 288);
+            this.WinnerArea.Name = "WinnerArea";
+            this.WinnerArea.Size = new System.Drawing.Size(316, 149);
+            this.WinnerArea.TabIndex = 13;
+            this.WinnerArea.TabStop = false;
+            // 
+            // WinnerLabel
+            // 
+            this.WinnerLabel.AutoSize = true;
+            this.WinnerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WinnerLabel.Location = new System.Drawing.Point(42, 325);
+            this.WinnerLabel.Name = "WinnerLabel";
+            this.WinnerLabel.Size = new System.Drawing.Size(270, 60);
+            this.WinnerLabel.TabIndex = 14;
+            this.WinnerLabel.Text = "If red wins => this says \"Red Wins!\" \r\nIf blue wins => this says \"Blue Wins!\" \r\nI" +
+    "f nobody wins, say \"It\'s a draw!\" ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(981, 652);
+            this.Controls.Add(this.WinnerLabel);
+            this.Controls.Add(this.WinnerArea);
+            this.Controls.Add(this.BlueStoneCount);
+            this.Controls.Add(this.RedStoneCount);
+            this.Controls.Add(this.BlueStone);
+            this.Controls.Add(this.RedStone);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.SettingsButton);
-            this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.NewGameButton);
             this.Controls.Add(this.BlueTurnLabel);
             this.Controls.Add(this.RedTurnLabel);
@@ -158,6 +219,9 @@ namespace Reversie
             ((System.ComponentModel.ISupportInitialize)(this.GameArea)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedTurn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlueTurn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RedStone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BlueStone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WinnerArea)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,9 +235,14 @@ namespace Reversie
         private System.Windows.Forms.Label RedTurnLabel;
         private System.Windows.Forms.Label BlueTurnLabel;
         private Button NewGameButton;
-        private Label StatusLabel;
         private Button SettingsButton;
         private Button HelpButton;
+        private PictureBox RedStone;
+        private PictureBox BlueStone;
+        private Label RedStoneCount;
+        private Label BlueStoneCount;
+        private PictureBox WinnerArea;
+        private Label WinnerLabel;
     }
 }
 
