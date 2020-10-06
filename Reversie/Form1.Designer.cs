@@ -61,6 +61,7 @@ namespace Reversie
             this.GameArea.Size = new System.Drawing.Size(628, 628);
             this.GameArea.TabIndex = 0;
             this.GameArea.TabStop = false;
+            this.GameArea.Click += new System.EventHandler(this.GameArea_Click);
             // 
             // RedTurn
             // 
