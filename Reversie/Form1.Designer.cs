@@ -65,7 +65,7 @@ namespace Reversie
             // 
             // RedTurn
             // 
-            this.RedTurn.BackColor = System.Drawing.Color.Red;
+            this.RedTurn.BackColor = System.Drawing.Color.White;
             this.RedTurn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RedTurn.Location = new System.Drawing.Point(13, 12);
             this.RedTurn.Name = "RedTurn";
@@ -75,7 +75,7 @@ namespace Reversie
             // 
             // BlueTurn
             // 
-            this.BlueTurn.BackColor = System.Drawing.Color.Blue;
+            this.BlueTurn.BackColor = System.Drawing.Color.White;
             this.BlueTurn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BlueTurn.Location = new System.Drawing.Point(178, 12);
             this.BlueTurn.Name = "BlueTurn";
@@ -86,7 +86,7 @@ namespace Reversie
             // RedTurnLabel
             // 
             this.RedTurnLabel.AutoSize = true;
-            this.RedTurnLabel.BackColor = System.Drawing.Color.Red;
+            this.RedTurnLabel.BackColor = System.Drawing.Color.White;
             this.RedTurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RedTurnLabel.ForeColor = System.Drawing.Color.White;
             this.RedTurnLabel.Location = new System.Drawing.Point(42, 25);
@@ -98,7 +98,7 @@ namespace Reversie
             // BlueTurnLabel
             // 
             this.BlueTurnLabel.AutoSize = true;
-            this.BlueTurnLabel.BackColor = System.Drawing.Color.Blue;
+            this.BlueTurnLabel.BackColor = System.Drawing.Color.White;
             this.BlueTurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BlueTurnLabel.ForeColor = System.Drawing.Color.White;
             this.BlueTurnLabel.Location = new System.Drawing.Point(209, 25);
@@ -237,7 +237,7 @@ namespace Reversie
         private System.Windows.Forms.Label BlueTurnLabel;
         private Button NewGameButton;
         private Button SettingsButton;
-        private Button HelpButton;
+        private new Button HelpButton;
         private PictureBox RedStone;
         private PictureBox BlueStone;
         private Label RedStoneCount;
