@@ -30,14 +30,10 @@ namespace Reversie
     {
         public double Rows = 6;
         public double Columns = 6;
-
-        // Arrays for phisical location and representation of stones
-        // 0 is no stone, 1 is red, 2 is blue and 3 is white
         public int[,] FetchArray;
         public Rectangle[,] CoordArray;
-
-        // True if red, false if blue
         public bool Turn;
+        public int check;
 
         public Form1()
         {
@@ -50,7 +46,6 @@ namespace Reversie
 
             RedStone.Paint += (sender, e) => InitPaintStones(sender, e, _rect1, color1);
             BlueStone.Paint += (sender, e) => InitPaintStones(sender, e, _rect2, color2);
-            InitGame();
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)
@@ -59,15 +54,10 @@ namespace Reversie
             InitGame();
         }
 
+
+        // UPDATER
         private void GameArea_Click(object sender, EventArgs ea)
         {
-            /*
-             * Click on square => DONE!
-             * Get position of that square in CoordArray => DONE!
-             * Set value in FetchArray on position from CoordArray => DONE!
-             * Check for stones to be flipped
-             * Change those values in array (don't know how yet)
-            */
             Point RelativePos = PointToClient(Cursor.Position);
             int x = RelativePos.X - 341;
             int y = RelativePos.Y - 12;
@@ -83,20 +73,40 @@ namespace Reversie
                         {
                             case true:
                                 FetchArray[i, j] = 1;
+                                check = 2;
                                 break;
                             case false:
                                 FetchArray[i, j] = 2;
+                                check = 1;
                                 break;
                         }
-                        PaintStones(CoordArray[i, j]);
+                        Point _StonePoint = new Point(i, j);
+
                         ChangeTurn();
+                        //
+                        // Horizontals
+                        Check(_StonePoint, 0, 1); 
+                        Check(_StonePoint, 0, -1);
+                        //
+                        // Vericals
+                        Check(_StonePoint, -1, 0); 
+                        Check(_StonePoint, 1, 0); 
+                        //
+                        // Diagonals
+                        Check(_StonePoint, -1, 1); 
+                        Check(_StonePoint, -1, -1);
+                        Check(_StonePoint, 1, -1);
+                        Check(_StonePoint, 1, 1);
+
+                        PaintStones();
+                        Count();
                     }
                 }
             }
-
-            
         }
 
+
+        // INITIALISATION FUNCTIONS
         // TODO: Stop this function if it is initialised again
         private async void InitAnimation()
         {
@@ -211,16 +221,6 @@ namespace Reversie
                 }
             }
 
-            switch (Turn)
-            {
-                case true:
-                    CheckStone(2);
-                    break;
-                case false:
-                    CheckStone(1);
-                    break;
-            }
-
             Count();
             GameArea.Refresh();
             g.Dispose();
@@ -232,30 +232,76 @@ namespace Reversie
                 e.Graphics.FillEllipse(_brush, _rect);
         }
 
-        private void CheckStone(int check)
-        {
-            /*
-             *We need 8 checks in total:
-             *front, back, diagonals, up and down
-             * Check for the stones of the other player,
-             *backtrack => is a stone of yours in the backtracked row / column / diagonal ?:
-             *set the small white circle on the next position in the row / column / diagonal
-             *          if a player has placed their stone on the small white circle:
-             *backtrack and change every value you meet until you hit another stone of yours
-             *
-             */
-            /*
-            for (int i = 0; i < FetchArray.GetLength(0); i++)
-            {
-                for (int j = 0; j < FetchArray.GetLength(1); i++)
-                {
-                    if (FetchArray[i, j] == check)
-                    {
 
+        // HELPER FUNCTIONS
+        private void Check(Point StonePoint, int NextX, int NextY)
+        {
+            int x = StonePoint.X;
+            int y = StonePoint.Y;
+            int counter = 0;
+            int length = 0;
+
+            if ((int)Rows >= (int)Columns) length = (int)Rows;
+            else if ((int)Rows < (int)Columns) length = (int)Columns;
+
+            for (int i = 0; i < length; i++)
+            {
+                x += NextX;
+                y += NextY;
+
+                // Check if x and y are out of bounds
+                if (x < 0) x = 0;
+                if (x >= (int)Rows) x = (int)Rows - 1;
+                if (y < 0) y = 0;
+                if (y >= (int)Columns) y = (int)Columns - 1;
+
+                // Increment counter if another stone is founds
+                if (FetchArray[x, y] == check)
+                {
+                    counter++;
+                }
+
+                // If another stone of yours is found
+                else if (FetchArray[x, y] == FetchArray[StonePoint.X, StonePoint.Y])
+                {
+                    if (counter != 0)
+                    {
+                        ChangeValues(StonePoint, NextX, NextY, counter);
+                        break;
                     }
                 }
+
+                // Else break out of the loop
+                else
+                {
+                    break;
+                }
             }
-            */
+        }
+
+        private void ChangeValues(Point StonePoint, int NextX, int NextY, int counter)
+        {
+            int x = StonePoint.X;
+            int y = StonePoint.Y;
+
+            for (int i = 0; i < counter; i++)
+            {
+                x += NextX;
+                y += NextY;
+
+                // Check for out of bounds
+                if (x < 0) x = 0;
+                if (x >= (int)Rows) x = (int)Rows - 1;
+                if (y < 0) y = 0;
+                if (y >= (int)Columns) y = (int)Columns - 1;
+
+                if (FetchArray[x, y] == FetchArray[StonePoint.X, StonePoint.Y])
+                {
+                    break;
+                }
+                else
+                    FetchArray[x, y] = FetchArray[StonePoint.X, StonePoint.Y];
+            }
         }
 
         private void Count()
@@ -268,10 +314,6 @@ namespace Reversie
                 {
                     switch (FetchArray[i, j])
                     {
-                        // if there are no stones
-                        case 0:
-                            break;
-
                         // Red
                         case 1:
                             RedCount++;
@@ -281,10 +323,6 @@ namespace Reversie
                         case 2:
                             BlueCount++;
                             break;
-
-                        // White -> Still needs to be done;
-                        case 3:
-                            break;
                     }
                 }
             }
@@ -292,19 +330,26 @@ namespace Reversie
             BlueStoneCount.Text = BlueCount.ToString() + " Stones";
         }
 
-        private void PaintStones(Rectangle rect)
+        private void PaintStones()
         {
             Graphics g = Graphics.FromImage(GameArea.Image);
-
-            switch (Turn)
+            for (int i = 0; i < FetchArray.GetLength(0); i++)
             {
-                case true:
-                    g.FillEllipse(new SolidBrush(Color.Red), rect);
-                    break;
-                case false:
-                    g.FillEllipse(new SolidBrush(Color.Blue), rect);
-                    break;
+                for (int j = 0; j < FetchArray.GetLength(1); j++)
+                {
+                    switch (FetchArray[i, j])
+                    {
+                        case 1:
+                            g.FillEllipse(new SolidBrush(Color.Red), CoordArray[i, j]);
+                            break;
+                        case 2:
+                            g.FillEllipse(new SolidBrush(Color.Blue), CoordArray[i, j]);
+                            break;
+                        // case 3 still needs to be added (white circles)
+                    }
+                }
             }
+
             GameArea.Refresh();
             g.Dispose();
         }
